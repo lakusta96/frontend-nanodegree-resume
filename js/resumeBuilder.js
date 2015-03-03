@@ -58,20 +58,38 @@ $("#topContacts").append(formattedEmail);
 $("#topContacts").append(formattedPhone);
 
 $("#header").append(formattedWelcomeMsg);
-$("#header").append(HTMLskillsStart);
+if (bio.skills.length > 0) {
+	$("#header").append(HTMLskillsStart);	
+}
 $("#skills").append(formattedSkills);
 
 
-var work = {};
-work.position = "HCI student";
-work.employer = "TransferWise";
-work.years = "2015-2016";
-work.city = "TALLINN";
+var work = [
+	{}, 
+	{
+		position : "SOFTWARE ENGINEER",
+		employer : "APPLE",
+		years : "2016-2017",
+		city : "BERLIN",
+		description : "I worked here for quite a while! I really like APPLE for being such a great startup, enabling people to be iPeople!"
+	}
+];
+work[0].position = "HCI student";
+work[0].employer = "TransferWise";
+work[0].years = "2015-2016";
+work[0].city = "TALLINN";
+work[0].description = "I worked here for quite a while! I really like TransferWise for being such a great startup, enabling people to make seamless payments throughout the world!";
 
-$("#workExperience").append(HTMLworkStart);
-$("#workExperience").append(HTMLworkEmployer.replace("%data%", work.employer));
-$("#workExperience").append(HTMLworkDates.replace("%data%", work.years));
-$("#workExperience").append(HTMLworkLocation.replace("%data%", work.city));
+
+for (workItem in work) {
+	$("#workExperience").append(HTMLworkStart);
+	$(".work-entry:last").append(HTMLworkEmployer.replace("%data%", work[workItem].employer));
+	$(".work-entry:last").append(HTMLworkDates.replace("%data%", work[workItem].years));
+	$(".work-entry:last").append(HTMLworkLocation.replace("%data%", work[workItem].city));	
+	$(".work-entry:last").append(HTMLworkDescription.replace("%data%", work[workItem].description));
+	$(".work-entry:last").append("<br>");
+}
+
 
 
 var education = {
@@ -86,8 +104,8 @@ var education = {
 
 
 $("#education").append(HTMLschoolStart);
-$("#education").append(HTMLschoolName.replace("%data%", education.school.name));
-$("#education").append(HTMLschoolDegree.replace("%data%", education.school.major));
-$("#education").append(HTMLschoolDates.replace("%data%", education["school"].years));
-$("#education").append(HTMLschoolLocation.replace("%data%", education.school.city));
+$(".education-entry").append(HTMLschoolName.replace("%data%", education.school.name));
+$(".education-entry").append(HTMLschoolDegree.replace("%data%", education.school.major));
+$(".education-entry").append(HTMLschoolDates.replace("%data%", education["school"].years));
+$(".education-entry").append(HTMLschoolLocation.replace("%data%", education.school.city));
 
